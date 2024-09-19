@@ -6,14 +6,16 @@ import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.ecommapp.marketino.api.ApiClient
+import com.ecommapp.marketino.api.GuestApiClient
+
 import com.ecommapp.marketino.api.Resource
+import com.ecommapp.marketino.api.TokenApiClient
 import com.ecommapp.marketino.data.authentication.login.LoginRequest
 import com.ecommapp.marketino.data.authentication.login.LoginResponse
 import com.ecommapp.marketino.data.authentication.register.CreateRegistration
 import com.ecommapp.marketino.data.authentication.register.RegistrationResponse
 import com.ecommapp.marketino.datasource.DatastoreManager
-import com.ecommapp.marketino.repository.ProductRepository
+import com.ecommapp.marketino.repository.AuthRepo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
@@ -34,7 +36,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
 
 
-    private val repository = ProductRepository(ApiClient.api)
+    private val authRepo = AuthRepo(GuestApiClient.api)
     private val dataStoreManager = DatastoreManager(application)
 
 
@@ -52,7 +54,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         )
 
         viewModelScope.launch {
-            repository.createRegistration(
+            authRepo.createRegistration(
                 newInstance
             ).collect { resource ->
                 when (resource) {
@@ -92,7 +94,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         Log.d("Viewmodel","onCLickLogin")
         Log.d("Viewmodel",loginInstance.toString())
         viewModelScope.launch {
-            repository.login(
+            authRepo.login(
                 loginInstance
             ).collect { resource ->
                 when (resource) {

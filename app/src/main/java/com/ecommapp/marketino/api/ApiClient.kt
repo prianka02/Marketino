@@ -1,26 +1,25 @@
 package com.ecommapp.marketino.api
 
-import com.ecommapp.marketino.service.ProductService
+import com.ecommapp.marketino.service.AuthService
+import com.ecommapp.marketino.service.ProtectedService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object GuestApiClient {
-    val api: ProductService by lazy {
+    val api: AuthService by lazy {
         Retrofit.Builder()
             .baseUrl("https://sample-ecom.parallaxlogic.dev/api/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(ProductService::class.java)
+            .create(AuthService::class.java)
     }
 }
 
-object ProtectedApiClient {
-
- // OkHttpClient with AuthInterceptor to add the token in headers
+object TokenApiClient {
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor { chain ->
-            val token = "tokenProvider.getToken()" //get token
+            val token = "dataStoreManager.getBoolean"
             val newRequest = chain.request().newBuilder()
                 .addHeader("Authorization", "Bearer $token")
                 .build()
@@ -29,12 +28,12 @@ object ProtectedApiClient {
         .build()
 
     // Retrofit instance with custom OkHttpClient
-    val api: ProductService by lazy {
+    val api: ProtectedService by lazy {
         Retrofit.Builder()
             .baseUrl("https://sample-ecom.parallaxlogic.dev/api/")
             .client(okHttpClient) // Add OkHttpClient to Retrofit
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(ProductService::class.java)
+            .create(ProtectedService::class.java)
     }
 }

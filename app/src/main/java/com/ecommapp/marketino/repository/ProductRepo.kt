@@ -6,21 +6,19 @@ import com.ecommapp.marketino.data.authentication.login.LoginRequest
 import com.ecommapp.marketino.data.authentication.login.LoginResponse
 import com.ecommapp.marketino.data.authentication.register.CreateRegistration
 import com.ecommapp.marketino.data.authentication.register.RegistrationResponse
-import com.ecommapp.marketino.service.ProductService
+import com.ecommapp.marketino.service.AuthService
+import com.ecommapp.marketino.service.ProtectedService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-class ProductRepository(private val api: ProductService) {
+class ProductRepo(private val api: ProtectedService) {
 
-    suspend fun createRegistration(
-        user: CreateRegistration
-
-    ): Flow<Resource<RegistrationResponse>> = flow {
+    suspend fun getProducts(): Flow<Resource<String>> = flow {
         try {
             emit(Resource.Loading) // Emit loading state
-            val response = api.createAccount(user) // Make the network request
+            val response = api.product() // Make the network request
 //            Log.d("Repository createRegistration ", response.toString())
 //            println("Repository createRegistration  $response")
             emit(Resource.Success(response))
@@ -31,19 +29,6 @@ class ProductRepository(private val api: ProductService) {
         }
     }.flowOn(Dispatchers.IO)
 
-    suspend fun login(
-        user: LoginRequest
-    ): Flow<Resource<LoginResponse>> = flow {
-        try {
-            emit(Resource.Loading) // Emit loading state
-            val response = api.login(user) // Make the network request
-            Log.d("Repository", response.toString())
-            emit(Resource.Success(response))
 
-        } catch (e: Exception) {
-            emit(Resource.Error(e.message ?: "Unknown Error")) // Emit error state
-            Log.d("Error", e.toString())
-        }
-    }.flowOn(Dispatchers.IO)
 
 }

@@ -22,9 +22,7 @@ class SplashScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_splash_screen)
-
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-
         // Start handling splash screen in ViewModel
         viewModel.handleSplashScreen()
 
@@ -39,17 +37,11 @@ class SplashScreen : AppCompatActivity() {
 
     }
     private fun checkLoginStatusAndNavigate() {
-
         Toast.makeText(this, "checkLoginStatusAndNavigate", Toast.LENGTH_SHORT).show()
-
-
-
         lifecycleScope.launch {
             viewModel.checkLoginStatus().collect { isLoggedIn ->
                 if (isLoggedIn == true) {
                     // Navigate to HomeActivity if logged in
-
-
                     navigateToHome()
                 } else {
                     // Navigate to LoginActivity if not logged in
@@ -61,7 +53,6 @@ class SplashScreen : AppCompatActivity() {
 
 
     private fun navigateToHome() {
-
         Toast.makeText(this, "navigateToHome", Toast.LENGTH_SHORT).show()
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
