@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Marketino</string>
+    <string name="registration">Registration</string>
+    <string name="or_sign_up_with">or sign up with</string>
+    <string name="re_enter_password">Re-enter Password</string>
+    <string name="user_name">User Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="marketino">Marketino</string>
+    <string name="trustable_online_shopping">Trustable Online Shopping</string>
+</resources>
