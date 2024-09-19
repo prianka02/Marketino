@@ -1,7 +1,6 @@
 package com.ecommapp.marketino.data.authentication.login
 
 data class LoginRequest(
-
-    val email: String?,
+    val user_id: String?,
     val password: String?
-    )
+)

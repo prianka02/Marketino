@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -42,9 +43,13 @@ class SplashScreen : AppCompatActivity() {
     fun checkLogin() {
         lifecycleScope.launch {
             viewModel.tokenFlow.collect { token ->
+
+                Log.d("SPLASH",token.toString())
                 if (token != null) {
+                    Log.d("SPLASH","IF")
                     navigateToHome()
                 } else {
+                    Log.d("SPLASH","ELSE")
                     navigateToLogin()
                 }
             }

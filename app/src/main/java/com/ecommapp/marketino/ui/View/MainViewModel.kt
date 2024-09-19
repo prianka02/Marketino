@@ -86,7 +86,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         userPassword: String
     ) {
         val loginInstance = LoginRequest(
-            email = userEmail,
+            user_id = userEmail,
             password = userPassword
         )
 
