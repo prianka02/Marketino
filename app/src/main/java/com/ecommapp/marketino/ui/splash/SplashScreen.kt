@@ -5,18 +5,13 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.ecommapp.marketino.R
-import com.ecommapp.marketino.datasource.DataStoreKeys
-import com.ecommapp.marketino.ui.view.MainViewModel
-import com.ecommapp.marketino.ui.auth.Login
-import com.ecommapp.marketino.ui.home.HomeActivity
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
+import com.ecommapp.marketino.ui.auth.LoginActivity
+import com.ecommapp.marketino.ui.home.MainActivity
 import kotlinx.coroutines.launch
 
 class SplashScreen : AppCompatActivity() {
@@ -57,13 +52,13 @@ class SplashScreen : AppCompatActivity() {
 
 
     private fun navigateToHome() {
-        val intent = Intent(this, HomeActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }
 
     private fun navigateToLogin() {
-        val intent = Intent(this, Login::class.java)
+        val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
     }

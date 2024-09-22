@@ -14,4 +14,9 @@
     <string name="profile">Profile</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="this_account_has_already_been_registered">This account has already been registered!</string>
+    <string name="register">REGISTER</string>
+    <string name="twitter_logo">Twitter logo</string>
+    <string name="facebook_logo">Facebook Logo</string>
+    <string name="google_logo">Google Logo</string>
 </resources>

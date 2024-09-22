@@ -3,15 +3,12 @@ package com.ecommapp.marketino.ui.home
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ecommapp.marketino.R
-import com.ecommapp.marketino.ui.splash.SplashViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class HomeActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: HomeViewModel
     private lateinit var bottomNav: BottomNavigationView
 

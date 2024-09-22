@@ -2,13 +2,7 @@ package com.ecommapp.marketino.repository
 
 import android.util.Log
 import com.ecommapp.marketino.api.Resource
-import com.ecommapp.marketino.data.authentication.login.LoginRequest
-import com.ecommapp.marketino.data.authentication.login.LoginResponse
-import com.ecommapp.marketino.data.authentication.register.CreateRegistration
-import com.ecommapp.marketino.data.authentication.register.RegistrationResponse
-import com.ecommapp.marketino.data.product.ProductsResponse
 import com.ecommapp.marketino.data.products.ProductResponse
-import com.ecommapp.marketino.service.AuthService
 import com.ecommapp.marketino.service.ProtectedService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow

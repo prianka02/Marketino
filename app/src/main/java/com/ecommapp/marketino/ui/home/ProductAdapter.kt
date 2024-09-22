@@ -11,7 +11,7 @@ import com.ecommapp.marketino.data.products.Product
 
 class ProductAdapter(
     private var productList: List<Product>,
-//    private val onItemClick: (Product) -> Unit
+    private val onItemClick: (Product) -> Unit
 ):
     RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
@@ -31,7 +31,7 @@ class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = productList[position]
-//        holder.itemView.setOnClickListener { onItemClick(product) }
+        holder.itemView.setOnClickListener { onItemClick(product) }
         holder.apply {
             title.text = product.name
             price.text = "${product.price} TK"

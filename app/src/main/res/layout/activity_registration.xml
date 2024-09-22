@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context=".ui.home.HomeActivity">
+    tools:context=".ui.home.MainActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -18,12 +18,7 @@
         android:textColor="@color/black"
         android:gravity="center"
         android:layout_margin="25dp"/>
-    <ScrollView
-        android:id="@+id/scroll_view"
-        android:layout_below="@id/registration_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+
         <LinearLayout
             android:id="@+id/formLayout"
             android:layout_below="@id/registration_title"
@@ -118,15 +113,24 @@
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
-
-    </ScrollView>
+    <TextView
+        android:id="@+id/error_msz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/formLayout"
+        android:text="@string/this_account_has_already_been_registered"
+        android:layout_marginTop="0dp"
+        android:textSize="18sp"
+        android:visibility="gone"
+        android:textColor="@color/error_text"
+        android:layout_centerHorizontal="true"/>
     <com.google.android.material.button.MaterialButton
         android:id="@+id/signUpBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="REGISTER"
+        android:text="@string/register"
         android:textSize="20sp"
-        android:layout_below="@id/scroll_view"
+        android:layout_below="@id/error_msz"
         android:layout_centerHorizontal="true"
         android:backgroundTint="@color/design_default_color_secondary"
         />
@@ -150,16 +154,19 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="20dp"
+            android:contentDescription="@string/google_logo"
             android:src="@drawable/google"/>
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="20dp"
+            android:contentDescription="@string/facebook_logo"
             android:src="@drawable/fb"/>
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="20dp"
+            android:contentDescription="@string/twitter_logo"
             android:src="@drawable/twitter"/>
     </LinearLayout>
 

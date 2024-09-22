@@ -1,6 +1,7 @@
 package com.ecommapp.marketino.ui.home
 
 import ProductAdapter
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ecommapp.marketino.R
+import com.ecommapp.marketino.data.products.Product
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
@@ -38,15 +40,7 @@ class HomeFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerView)
         progressBar = view.findViewById(R.id.progressBar)
 
-
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-        // Initialize the adapter
-        adapter = ProductAdapter(emptyList())
-
-        // Set up RecyclerView
-        recyclerView.adapter = adapter
-
 
         handleLoading()
 
@@ -56,12 +50,23 @@ class HomeFragment : Fragment() {
                 val productList = response?.data?.data
 
                 if (productList != null) {
-                    adapter.updateList(productList)
+                    adapter = ProductAdapter(productList) { item ->
+                        navigateToDetails(item)
+                    }
+                    recyclerView.adapter = adapter
                 }
             }
         }
 
     }
+    private fun navigateToDetails(item: Product) {
+        val intent = Intent(requireContext(), DetailsActivity::class.java).apply {
+//            putExtra("PRODUCT", item)
+        }
+
+        startActivity(intent)
+    }
+
     private fun handleLoading() {
         lifecycleScope.launch {
             viewModel.isLoading.collect { isLoading ->

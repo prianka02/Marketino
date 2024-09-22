@@ -1,10 +1,8 @@
 package com.ecommapp.marketino.api
 
 import android.util.Log
-import com.ecommapp.marketino.datasource.DatastoreManager
 import com.ecommapp.marketino.service.AuthService
 import com.ecommapp.marketino.service.ProtectedService
-import kotlinx.coroutines.runBlocking
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

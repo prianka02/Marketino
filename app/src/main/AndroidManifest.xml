@@ -16,8 +16,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.home.DetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.splash.SplashScreen"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,14 +28,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.auth.Login"
+            android:name=".ui.auth.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.auth.Registration"
+            android:name=".ui.auth.RegisterActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize|stateVisible"/>
+            android:windowSoftInputMode="adjustResize|stateVisible" />
         <activity
-            android:name=".ui.home.HomeActivity"
+            android:name=".ui.home.MainActivity"
             android:exported="false" />
     </application>
 

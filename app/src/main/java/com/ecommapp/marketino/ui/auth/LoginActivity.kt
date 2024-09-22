@@ -5,24 +5,25 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.ecommapp.marketino.R
-import com.ecommapp.marketino.ui.home.HomeActivity
+import com.ecommapp.marketino.ui.home.MainActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
 
-class Login : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     private lateinit var userEmail: TextInputLayout
     private lateinit var userPassword: TextInputLayout
     private lateinit var loginbtn: MaterialButton
     private lateinit var optionRegister: TextView
+    private lateinit var errorText: TextView
     private lateinit var viewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,25 +37,22 @@ class Login : AppCompatActivity() {
         userPassword = findViewById(R.id.user_password)
         loginbtn = findViewById(R.id.signInBtn)
         optionRegister = findViewById(R.id.option_register)
+        errorText = findViewById(R.id.error_msz)
 
         // Set up text watchers for email and password input
         setupTextWatchers()
-
-        // Observe StateFlows for changes
-        observeViewModel()
-
 
         //onclick Listeners
         optionRegister.setOnClickListener {
             navigateToRegistration()
         }
 
-
+//        Button clicked listener for Login
         loginbtn.setOnClickListener {
             viewModel.onCLickLogin(this)
+            // Observe StateFlows for changes
+            observeViewModel()
         }
-
-
     }
 
 
@@ -90,20 +88,30 @@ class Login : AppCompatActivity() {
     private fun observeViewModel() {
         lifecycleScope.launch {
             viewModel.loginResponse.collect { response ->
-                if(response != null)
-                navigateToHome()
+                if(response != null) {
+                    navigateToHome()
+                    Log.d("response", response.toString())
+                }
             }
         }
+        lifecycleScope.launch {
+            viewModel.errorMessage.collect { isError ->
+                if(isError) {
+                    errorText.visibility = View.VISIBLE
+                }
+            }
+        }
+
     }
 
     private fun navigateToHome() {
-        val intent = Intent(this, HomeActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }
 
     private fun navigateToRegistration() {
-        val intent = Intent(this, Registration::class.java)
+        val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
     }
 }

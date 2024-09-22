@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context=".ui.home.HomeActivity">
+    tools:context=".ui.home.MainActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -73,13 +73,26 @@
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
+
+    <TextView
+        android:id="@+id/error_msz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/formLayout"
+        android:text="Please Registered First!"
+        android:layout_marginTop="0dp"
+        android:padding="2dp"
+        android:textSize="18sp"
+        android:visibility="gone"
+        android:textColor="@color/error_text"
+        android:layout_centerHorizontal="true"/>
     <com.google.android.material.button.MaterialButton
         android:id="@+id/signInBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"
         android:textSize="20sp"
-        android:layout_below="@id/formLayout"
+        android:layout_below="@id/error_msz"
         android:layout_centerHorizontal="true"
         android:backgroundTint="@color/design_default_color_secondary"
         />
@@ -97,6 +110,7 @@
         android:textColor="@color/black"
         android:linksClickable="true"
         android:layout_centerHorizontal="true"/>
+
 
 
 </RelativeLayout>
