@@ -23,10 +23,8 @@ object GuestApiClient {
 }
 
 object ProtectedApiClient {
-
     // Token to be injected later
     private var authToken: String? = null
-
 
     fun updateToken(token: String?) {
         authToken = token
