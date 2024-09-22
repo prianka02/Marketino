@@ -6,6 +6,7 @@ import com.ecommapp.marketino.data.authentication.login.LoginRequest
 import com.ecommapp.marketino.data.authentication.login.LoginResponse
 import com.ecommapp.marketino.data.authentication.register.CreateRegistration
 import com.ecommapp.marketino.data.authentication.register.RegistrationResponse
+import com.ecommapp.marketino.data.product.ProductsResponse
 import com.ecommapp.marketino.service.AuthService
 import com.ecommapp.marketino.service.ProtectedService
 import kotlinx.coroutines.Dispatchers
@@ -15,16 +16,16 @@ import kotlinx.coroutines.flow.flowOn
 
 class ProductRepo(private val api: ProtectedService) {
 
-    suspend fun getProducts(): Flow<Resource<String>> = flow {
+    suspend fun getProducts(): Flow<Resource<ProductsResponse>> = flow {
         try {
             emit(Resource.Loading) // Emit loading state
             val response = api.product() // Make the network request
-//            Log.d("Repository createRegistration ", response.toString())
-//            println("Repository createRegistration  $response")
+            Log.d("Repository getProducts ", response.toString())
             emit(Resource.Success(response))
 
         } catch (e: Exception) {
-            println("Repository createRegistration  error")
+            Log.d("Repository getProducts error ", e.toString())
+
             emit(Resource.Error(e.message ?: "Unknown Error")) // Emit error state
         }
     }.flowOn(Dispatchers.IO)

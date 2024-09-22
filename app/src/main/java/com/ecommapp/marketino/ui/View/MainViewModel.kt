@@ -9,7 +9,6 @@ import androidx.lifecycle.viewModelScope
 import com.ecommapp.marketino.api.GuestApiClient
 
 import com.ecommapp.marketino.api.Resource
-import com.ecommapp.marketino.api.TokenApiClient
 import com.ecommapp.marketino.data.authentication.login.LoginRequest
 import com.ecommapp.marketino.data.authentication.login.LoginResponse
 import com.ecommapp.marketino.data.authentication.register.CreateRegistration

@@ -10,9 +10,9 @@ import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.ecommapp.marketino.api.GuestApiClient
+import com.ecommapp.marketino.api.ProtectedApiClient
 
 import com.ecommapp.marketino.api.Resource
-import com.ecommapp.marketino.api.TokenApiClient
 import com.ecommapp.marketino.data.authentication.login.LoginRequest
 import com.ecommapp.marketino.data.authentication.login.LoginResponse
 import com.ecommapp.marketino.data.authentication.register.CreateRegistration
@@ -99,12 +99,12 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     fun onCLickLogin(context: Context) {
         if (validateForm()) {
 
-            Log.d("Viewmodel"," IF")
+            Log.d("Viewmodel", " IF")
             val loginInstance = LoginRequest(
                 user_id = emailStateFlow.value,
                 password = passwordStateFlow.value
             )
-            Log.d("Viewmodel",loginInstance.toString())
+            Log.d("Viewmodel", loginInstance.toString())
             viewModelScope.launch {
                 authRepo.login(
                     loginInstance
@@ -118,9 +118,16 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                             isLoading.value = false // Stop loading
                             loginResponse.value = resource.data // Set news data
                             Log.d("Viewmodel", resource.data.toString())
+
+
+
                             resource.data.token?.let {
                                 dataStoreManager.saveString(DataStoreKeys.token, it)
+                                // Inject token into the API client
+                                ProtectedApiClient.updateToken(it)
                             }
+
+
                         }
 
                         is Resource.Error -> {
@@ -132,7 +139,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
             }
         } else {
 
-            Log.d("Viewmodel"," else")
+            Log.d("Viewmodel", " else")
             Toast.makeText(context, "Enter Valid Data", Toast.LENGTH_SHORT).show()
         }
     }
