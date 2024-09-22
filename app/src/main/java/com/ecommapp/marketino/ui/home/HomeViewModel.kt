@@ -18,6 +18,7 @@ import com.ecommapp.marketino.data.authentication.login.LoginResponse
 import com.ecommapp.marketino.data.authentication.register.CreateRegistration
 import com.ecommapp.marketino.data.authentication.register.RegistrationResponse
 import com.ecommapp.marketino.data.product.ProductsResponse
+import com.ecommapp.marketino.data.products.ProductResponse
 import com.ecommapp.marketino.datasource.DataStoreKeys
 import com.ecommapp.marketino.datasource.DatastoreManager
 import com.ecommapp.marketino.repository.AuthRepo
@@ -32,7 +33,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
-    val productResponseFlow = MutableStateFlow<ProductsResponse?>(null)
+    val productResponseFlow = MutableStateFlow<ProductResponse?>(null)
     val isLoading = MutableStateFlow(true)
     val errorMessage = MutableStateFlow<String?>(null)
 

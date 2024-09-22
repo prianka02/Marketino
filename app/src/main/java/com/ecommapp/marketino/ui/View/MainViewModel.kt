@@ -1,4 +1,4 @@
-package com.ecommapp.marketino.ui.View
+package com.ecommapp.marketino.ui.view
 
 import android.app.Application
 import android.os.Handler
@@ -53,7 +53,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         )
 
         viewModelScope.launch {
-            authRepo.createRegistration(
+            authRepo.createRegi(
                 newInstance
             ).collect { resource ->
                 when (resource) {

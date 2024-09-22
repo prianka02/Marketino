@@ -95,7 +95,6 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
     }
 
-
     fun onCLickLogin(context: Context) {
         if (validateForm()) {
 

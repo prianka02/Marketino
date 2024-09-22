@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.flowOn
 
 class AuthRepo(private val api: AuthService) {
 
-    suspend fun createRegistration(
+    suspend fun createRegi(
         user: CreateRegistration
 
     ): Flow<Resource<RegistrationResponse>> = flow {
@@ -26,7 +26,6 @@ class AuthRepo(private val api: AuthService) {
             emit(Resource.Success(response))
 
         } catch (e: Exception) {
-            println("Repository createRegistration  error")
             emit(Resource.Error(e.message ?: "Unknown Error")) // Emit error state
         }
     }.flowOn(Dispatchers.IO)

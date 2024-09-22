@@ -8,14 +8,12 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.ecommapp.marketino.R
 import com.ecommapp.marketino.datasource.DataStoreKeys
-import com.ecommapp.marketino.ui.View.MainViewModel
+import com.ecommapp.marketino.ui.view.MainViewModel
 import com.ecommapp.marketino.ui.auth.Login
-import com.ecommapp.marketino.ui.auth.Registration
 import com.ecommapp.marketino.ui.home.HomeActivity
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest

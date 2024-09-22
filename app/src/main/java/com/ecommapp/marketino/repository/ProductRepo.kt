@@ -7,6 +7,7 @@ import com.ecommapp.marketino.data.authentication.login.LoginResponse
 import com.ecommapp.marketino.data.authentication.register.CreateRegistration
 import com.ecommapp.marketino.data.authentication.register.RegistrationResponse
 import com.ecommapp.marketino.data.product.ProductsResponse
+import com.ecommapp.marketino.data.products.ProductResponse
 import com.ecommapp.marketino.service.AuthService
 import com.ecommapp.marketino.service.ProtectedService
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +17,7 @@ import kotlinx.coroutines.flow.flowOn
 
 class ProductRepo(private val api: ProtectedService) {
 
-    suspend fun getProducts(): Flow<Resource<ProductsResponse>> = flow {
+    suspend fun getProducts(): Flow<Resource<ProductResponse>> = flow {
         try {
             emit(Resource.Loading) // Emit loading state
             val response = api.product() // Make the network request

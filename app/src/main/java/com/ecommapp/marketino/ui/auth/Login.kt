@@ -12,8 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.ecommapp.marketino.R
-import com.ecommapp.marketino.data.authentication.register.RegistrationResponse
-import com.ecommapp.marketino.ui.View.MainViewModel
 import com.ecommapp.marketino.ui.home.HomeActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
@@ -33,7 +31,7 @@ class Login : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
-        //referenece
+        //references
         userEmail = findViewById(R.id.user_email)
         userPassword = findViewById(R.id.user_password)
         loginbtn = findViewById(R.id.signInBtn)

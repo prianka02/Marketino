@@ -16,6 +16,16 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 
 class DatastoreManager(private val context: Context) {
 
+    // Save a token in the DataStore
+    suspend fun saveToken(token: String) {
+        saveString(DataStoreKeys.token, token)
+    }
+
+    // Retrieve the token from the DataStore
+    fun getToken(): Flow<String?> {
+        return getString(DataStoreKeys.token, null)
+    }
+
     // Save a string value in the DataStore
     suspend fun saveString(key: String, value: String) {
         val dataStoreKey = stringPreferencesKey(key)
@@ -63,4 +73,5 @@ class DatastoreManager(private val context: Context) {
             preferences[dataStoreKey] ?: defaultValue
         }
     }
+
 }

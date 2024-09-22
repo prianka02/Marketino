@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.ecommapp.marketino.R
 import com.ecommapp.marketino.data.authentication.register.RegistrationResponse
-import com.ecommapp.marketino.ui.View.MainViewModel
+import com.ecommapp.marketino.ui.view.MainViewModel
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch

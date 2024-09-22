@@ -5,12 +5,15 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ecommapp.marketino.R
 import com.ecommapp.marketino.ui.splash.SplashViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var viewModel: HomeViewModel
+    private lateinit var bottomNav: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,5 +22,58 @@ class HomeActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
 
 
+        bottomNav = findViewById(R.id.bottomNav)
+        bottomNav.setOnApplyWindowInsetsListener(null)
+        bottomNav.setPadding(0, 0, 0, 0)
+
+
+        val homeFragment: Fragment = HomeFragment()
+        val shopFragment: Fragment = ShopFragment()
+        val profileFragment: Fragment = ProfileFragment()
+
+        supportFragmentManager.beginTransaction().apply {
+            add(R.id.content, homeFragment)
+            add(R.id.content, shopFragment)
+            add(R.id.content, profileFragment)
+            hide(shopFragment)
+            hide(profileFragment)
+            commit()
+        }
+        replaceFragment(HomeFragment())
+
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.home -> {
+                    replaceFragment(HomeFragment())
+                    true
+                }
+
+                R.id.shop -> {
+                    replaceFragment(ShopFragment())
+                    true
+                }
+
+                R.id.profile -> {
+                    replaceFragment(ProfileFragment())
+                    true
+                }
+
+                else -> return@setOnItemSelectedListener false
+            }
+
+
+            true
+        }
+
+
     }
+
+    private fun replaceFragment(homeFragment: Fragment) {
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.content, homeFragment)
+        fragmentTransaction.commit()
+
+    }
+
 }
