@@ -63,7 +63,6 @@ class HomeFragment : Fragment() {
         val intent = Intent(requireContext(), DetailsActivity::class.java).apply {
 //            putExtra("PRODUCT", item)
         }
-
         startActivity(intent)
     }
 

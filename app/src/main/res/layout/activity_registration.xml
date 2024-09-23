@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
+    android:fillViewport="true"
+    android:isScrollContainer="true"
+    android:fitsSystemWindows="true"
     tools:context=".ui.home.MainActivity">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/registration_title"
-        android:text="@string/registration"
-        android:textSize="35sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:gravity="center"
-        android:layout_margin="25dp"/>
+        android:background="@drawable/gradient_background"
+        android:id="@+id/main"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/registration_title"
+            android:text="@string/registration"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:layout_margin="25dp"/>
 
         <LinearLayout
             android:id="@+id/formLayout"
@@ -113,62 +120,64 @@
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
-    <TextView
-        android:id="@+id/error_msz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/formLayout"
-        android:text="@string/this_account_has_already_been_registered"
-        android:layout_marginTop="0dp"
-        android:textSize="18sp"
-        android:visibility="gone"
-        android:textColor="@color/error_text"
-        android:layout_centerHorizontal="true"/>
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/signUpBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/register"
-        android:textSize="20sp"
-        android:layout_below="@id/error_msz"
-        android:layout_centerHorizontal="true"
-        android:backgroundTint="@color/design_default_color_secondary"
-        />
-    <TextView
-        android:id="@+id/option_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/signUpBtn"
-        android:text="@string/or_sign_up_with"
-        android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/social_icons"
-        android:gravity="center"
-        android:layout_below="@id/option_text"
-        android:layout_marginBottom="30dp">
+        <TextView
+            android:id="@+id/error_msz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/formLayout"
+            android:text="@string/this_account_has_already_been_registered"
+            android:layout_marginTop="0dp"
+            android:textSize="18sp"
+            android:visibility="gone"
+            android:textColor="@color/error_text"
+            android:layout_centerHorizontal="true"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/signUpBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register"
+            android:textSize="20sp"
+            android:layout_below="@id/error_msz"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="@color/design_default_color_secondary"
+            />
+        <TextView
+            android:id="@+id/option_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/signUpBtn"
+            android:text="@string/or_sign_up_with"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/social_icons"
+            android:gravity="center"
+            android:layout_below="@id/option_text"
+            android:layout_marginBottom="30dp">
 
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="20dp"
-            android:contentDescription="@string/google_logo"
-            android:src="@drawable/google"/>
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="20dp"
-            android:contentDescription="@string/facebook_logo"
-            android:src="@drawable/fb"/>
-        <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="20dp"
-            android:contentDescription="@string/twitter_logo"
-            android:src="@drawable/twitter"/>
-    </LinearLayout>
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="20dp"
+                android:contentDescription="@string/google_logo"
+                android:src="@drawable/google"/>
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="20dp"
+                android:contentDescription="@string/facebook_logo"
+                android:src="@drawable/fb"/>
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="20dp"
+                android:contentDescription="@string/twitter_logo"
+                android:src="@drawable/twitter"/>
+        </LinearLayout>
+    </RelativeLayout>
 
 
-</RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>
