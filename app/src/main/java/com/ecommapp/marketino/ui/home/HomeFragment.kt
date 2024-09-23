@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ecommapp.marketino.R
@@ -40,8 +41,12 @@ class HomeFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerView)
         progressBar = view.findViewById(R.id.progressBar)
 
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+//        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        recyclerView.addItemDecoration(ItemSpacingDecoration(horizontal = 2, vertical = 2))
+        recyclerView.setPadding(8, 0, 0, 0)
 
+//        Handle the Loading
         handleLoading()
 
         lifecycleScope.launch {
@@ -61,7 +66,7 @@ class HomeFragment : Fragment() {
     }
     private fun navigateToDetails(item: Product) {
         val intent = Intent(requireContext(), DetailsActivity::class.java).apply {
-//            putExtra("PRODUCT", item)
+            putExtra("PRODUCT", item)
         }
         startActivity(intent)
     }
@@ -78,4 +83,4 @@ class HomeFragment : Fragment() {
         }
     }
 
- }
+}

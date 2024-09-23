@@ -1,5 +1,9 @@
 package com.ecommapp.marketino.data.products
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Product(
     val brand: Brand?,
     val brand_id: Int?,
@@ -13,7 +17,7 @@ data class Product(
     val discount: String?,
     val file_manager: FileManager?,
     val id: Int?,
-    val main_image: Any?,
+    val main_image: Int?,
     val name: String?,
     val other: String?,
     val price: String?,
@@ -26,4 +30,4 @@ data class Product(
     val sub_category: SubCategory?,
     val sub_category_id: Int?,
     val updated_at: String?
-)
+): Parcelable
