@@ -3,6 +3,7 @@ package com.ecommapp.marketino.ui.home
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ecommapp.marketino.api.ProtectedApiClient
 
@@ -14,6 +15,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
+    val count = MutableLiveData<Int>(0)
+    val liveResponse = MutableLiveData<ProductResponse?>(null)
     val productResponseFlow = MutableStateFlow<ProductResponse?>(null)
     val isLoading = MutableStateFlow(true)
     val errorMessage = MutableStateFlow<String?>(null)
@@ -27,6 +30,14 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     }
 
 
+    fun onIncrement(){
+        count.value = count.value?.plus(1)
+    }
+
+    fun onDecrement(){
+        count.value = count.value?.minus(1)
+    }
+
     fun getProducts() {
         viewModelScope.launch {
             protectedRepo.getProducts().collect { resource ->
@@ -38,7 +49,9 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                     is Resource.Success -> {
                         isLoading.value = false // Stop loading
                         productResponseFlow.value = resource.data // Set news data
+                        liveResponse.value = resource.data
                         Log.d("Viewmodel", resource.data.toString())
+
                     }
 
                     is Resource.Error -> {
