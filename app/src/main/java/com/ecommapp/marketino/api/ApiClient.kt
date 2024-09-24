@@ -7,7 +7,6 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
 val BaseURl = "https://sample-ecom.parallaxlogic.dev/api/"
 
 object GuestApiClient {

@@ -16,9 +16,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ecommapp.marketino.R
 import com.ecommapp.marketino.data.products.Product
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
+    private lateinit var floatingBtn: FloatingActionButton
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ProductAdapter
     private lateinit var progressBar: ProgressBar
@@ -38,6 +40,7 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
 
 
+        floatingBtn = view.findViewById(R.id.floating_btn)
         recyclerView = view.findViewById(R.id.recyclerView)
         progressBar = view.findViewById(R.id.progressBar)
 
@@ -61,6 +64,11 @@ class HomeFragment : Fragment() {
                     recyclerView.adapter = adapter
                 }
             }
+        }
+
+        floatingBtn.setOnClickListener {
+            val intent = Intent(requireContext(), EditProductList::class.java)
+            startActivity(intent)
         }
 
     }

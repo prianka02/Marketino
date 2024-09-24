@@ -59,6 +59,5 @@ class DetailsActivity : AppCompatActivity() {
             error(R.drawable.errorimage)
         }
 
-
     }
 }

@@ -8,17 +8,17 @@
     android:background="#F5F9FF"
     android:orientation="vertical"
     android:paddingTop="8dp"
+    android:fitsSystemWindows="true"
     tools:context=".ui.home.MainActivity">
+    <!--    Top Navbar-->
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
-
             <com.google.android.material.appbar.MaterialToolbar
                 style="@style/Widget.MaterialComponents.Toolbar.Primary"
                 android:layout_width="match_parent"
@@ -31,26 +31,22 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="#FCF0F0F0" />
 
+    <!--    Added Scroll View-->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+        android:layout_height="match_parent"
+        >
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp">
-
+                >
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
@@ -62,9 +58,24 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"/>
 
-            </RelativeLayout>
+                <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true">
 
-        </LinearLayout>
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/floating_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_margin="16dp"
+                    android:backgroundTint="@android:color/holo_purple"
+                    android:contentDescription="Fav button"
+                    android:src="@drawable/ic_add"/>
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+            </RelativeLayout>
 
     </androidx.core.widget.NestedScrollView>
 
