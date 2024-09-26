@@ -6,22 +6,23 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.ecommapp.marketino.R
+import com.ecommapp.marketino.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var mainViewBinding: ActivityMainBinding
     private lateinit var viewModel: HomeViewModel
-    private lateinit var bottomNav: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        mainViewBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(mainViewBinding.root)
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
 
 
-        bottomNav = findViewById(R.id.bottomNav)
-        bottomNav.setOnApplyWindowInsetsListener(null)
-        bottomNav.setPadding(0, 0, 0, 0)
+        mainViewBinding.bottomNav.setOnApplyWindowInsetsListener(null)
+        mainViewBinding.bottomNav.setPadding(0, 0, 0, 0)
 
 
         val homeFragment: Fragment = HomeFragment()
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         }
         replaceFragment(HomeFragment())
 
-        bottomNav.setOnItemSelectedListener { item ->
+        mainViewBinding.bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {
                     replaceFragment(HomeFragment())

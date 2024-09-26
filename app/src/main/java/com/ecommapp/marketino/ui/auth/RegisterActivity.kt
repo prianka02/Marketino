@@ -5,41 +5,34 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.ecommapp.marketino.R
+import com.ecommapp.marketino.databinding.ActivityRegistrationBinding
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.launch
 
 class RegisterActivity : AppCompatActivity() {
-    private lateinit var userName: TextInputLayout
-    private lateinit var phoneNumber: TextInputLayout
-    private lateinit var userEmail: TextInputLayout
-    private lateinit var userPassword: TextInputLayout
-    private lateinit var reEnterPassword: TextInputLayout
-    private lateinit var registerbtn: MaterialButton
-    private lateinit var errorText: TextView
+    private lateinit var registrationBinding: ActivityRegistrationBinding
     private lateinit var viewModel: RegisterViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_registration)
+
+//        ViewBinding added
+        registrationBinding = ActivityRegistrationBinding.inflate(layoutInflater)
+        setContentView(registrationBinding.root)
+
 //      View model initialization
         viewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
-
-        userName = findViewById(R.id.user_name)
-        phoneNumber = findViewById(R.id.phone_no)
-        userEmail = findViewById(R.id.user_email)
-        userPassword = findViewById(R.id.user_password)
-        reEnterPassword = findViewById(R.id.re_enter_password)
-        errorText = findViewById(R.id.error_msz)
-        registerbtn = findViewById(R.id.signUpBtn)
 
 
         // Set up text watchers for email and password input
@@ -47,7 +40,7 @@ class RegisterActivity : AppCompatActivity() {
 
 
         // Button clicked listener for Register
-        registerbtn.setOnClickListener {
+        registrationBinding.signUpBtn.setOnClickListener {
             viewModel.onCLickRegister(this)
             // Observe StateFlows for changes
             observeViewModel()
@@ -58,17 +51,17 @@ class RegisterActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         // Set initial text for the text fields
-        userName.editText?.setText(viewModel.nameStateFlow.value)
-        userEmail.editText?.setText(viewModel.emailStateFlow.value)
-        phoneNumber.editText?.setText(viewModel.phoneStateFlow.value)
-        userPassword.editText?.setText(viewModel.passwordStateFlow.value)
-        reEnterPassword.editText?.setText(viewModel.rePasswordStateFlow.value)
+        registrationBinding.userName.editText?.setText(viewModel.nameStateFlow.value)
+        registrationBinding.userEmail.editText?.setText(viewModel.emailStateFlow.value)
+        registrationBinding.phoneNo.editText?.setText(viewModel.phoneStateFlow.value)
+        registrationBinding.userPassword.editText?.setText(viewModel.passwordStateFlow.value)
+        registrationBinding.reEnterPassword.editText?.setText(viewModel.rePasswordStateFlow.value)
     }
 
     private fun setupTextWatchers() {
 
         // UserName text watcher
-        userName.editText?.addTextChangedListener(object : TextWatcher {
+        registrationBinding.userName.editText?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 viewModel.onNameChanged(s.toString())
@@ -77,7 +70,7 @@ class RegisterActivity : AppCompatActivity() {
         })
 
         // Email text watcher
-        userEmail.editText?.addTextChangedListener(object : TextWatcher {
+        registrationBinding.userEmail.editText?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 viewModel.onEmailChanged(s.toString())
@@ -86,7 +79,7 @@ class RegisterActivity : AppCompatActivity() {
         })
 
         // PhoneNO. text watcher
-        phoneNumber.editText?.addTextChangedListener(object : TextWatcher {
+        registrationBinding.phoneNo.editText?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 viewModel.onPhoneNoChanged(s.toString())
@@ -95,7 +88,7 @@ class RegisterActivity : AppCompatActivity() {
         })
 
         // Password text watcher
-        userPassword.editText?.addTextChangedListener(object : TextWatcher {
+        registrationBinding.userPassword.editText?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 viewModel.onPasswordChanged(s.toString())
@@ -104,7 +97,7 @@ class RegisterActivity : AppCompatActivity() {
         })
 
         // Re-Enter Password text watcher
-        reEnterPassword.editText?.addTextChangedListener(object : TextWatcher {
+        registrationBinding.reEnterPassword.editText?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 viewModel.onRePasswordChanged(s.toString())
@@ -127,7 +120,7 @@ class RegisterActivity : AppCompatActivity() {
         lifecycleScope.launch {
             viewModel.errorMessage.collect { isError ->
                 if(isError) {
-                    errorText.visibility = View.VISIBLE
+                    registrationBinding.errorMsz.visibility = View.VISIBLE
                 }
             }
         }

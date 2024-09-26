@@ -12,13 +12,15 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ecommapp.marketino.R
+import com.ecommapp.marketino.databinding.FragmentShopBinding
 import kotlinx.coroutines.launch
 
 class ShopFragment : Fragment() {
-    private lateinit var categoryrecyclerView: RecyclerView
+//    private lateinit var categoryrecyclerView: RecyclerView
     private lateinit var categoryAdapter: CategoryAdapter
-    private lateinit var progressBar: ProgressBar
+//    private lateinit var progressBar: ProgressBar
     private lateinit var viewModel: ShopViewModel
+    private lateinit var categoryBinding: FragmentShopBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,22 +32,24 @@ class ShopFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//        View binding added
+        categoryBinding = FragmentShopBinding.bind(view)
 
 //        ShopViewModel has added
         viewModel = ViewModelProvider(this)[ShopViewModel::class.java]
 
+//
+//        categoryrecyclerView = view.findViewById(R.id.rvParent)
+//        progressBar = view.findViewById(R.id.progressBar)
 
-        categoryrecyclerView = view.findViewById(R.id.rvParent)
-        progressBar = view.findViewById(R.id.progressBar)
-
-        categoryrecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        categoryBinding.rvParent.layoutManager = LinearLayoutManager(requireContext())
 
         categoryAdapter = CategoryAdapter(emptyList()) { item ->
 
             Log.d("Clicked", item.toString())
 //            navigateToDetails(item)
         }
-        categoryrecyclerView.adapter = categoryAdapter
+        categoryBinding.rvParent.adapter = categoryAdapter
 //        Handle the Loading
         handleLoading()
 
@@ -68,9 +72,9 @@ class ShopFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.isLoading.collect { isLoading ->
                 if (isLoading) {
-                    progressBar.visibility = View.VISIBLE
+                    categoryBinding.progressBar.visibility = View.VISIBLE
                 } else {
-                    progressBar.visibility = View.GONE
+                    categoryBinding.progressBar.visibility = View.GONE
                 }
             }
         }

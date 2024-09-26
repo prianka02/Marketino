@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ecommapp.marketino.R
 import com.ecommapp.marketino.data.category.Data
 import com.ecommapp.marketino.data.products.Product
+import com.ecommapp.marketino.databinding.CategoryItemBinding
 import java.util.Locale
 
 class CategoryAdapter(
@@ -17,15 +18,10 @@ class CategoryAdapter(
 
 ) :RecyclerView.Adapter<CategoryAdapter.ParentViewHolder>() {
 
-    class ParentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var productsCategory: TextView = view.findViewById(R.id.tvCategoryTitle)
-        var subCategoryRV: RecyclerView = view.findViewById(R.id.rvChildItems)
-    }
+    class ParentViewHolder(val binding: CategoryItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ParentViewHolder {
-        var view =
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.category_item, parent, false)
+        var view = CategoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ParentViewHolder(view)
     }
 
@@ -33,21 +29,15 @@ class CategoryAdapter(
 
         val category = categoryList?.get(position)
 
-        holder.productsCategory.text = category?.name?.replaceFirstChar {
+        holder.binding.tvCategoryTitle.text = category?.name?.replaceFirstChar {
             if (it.isLowerCase()) it.titlecase(
                 Locale.ROOT
             ) else it.toString()
         }
 
-        holder.subCategoryRV.layoutManager = LinearLayoutManager(holder.itemView.context, RecyclerView.HORIZONTAL,false)
+        holder.binding.rvChildItems.layoutManager = LinearLayoutManager(holder.itemView.context, RecyclerView.HORIZONTAL,false)
 //        holder.subCategoryRecyclerView.layoutManager = GridLayoutManager(holder.itemView.context, 3)
-        holder.subCategoryRV.adapter = SubCategoryAdapter(category?.sub_categories, onProductClick)
-
-//        holder.apply {
-//            productsCategory.text = category.categoryName?.capitalize() ?:
-//            childRecyclerView.layoutManager = GridLayoutManager(holder.itemView.context, 3)
-//            childRecyclerView.adapter = ChildAdapter(category.productList)
-//        }
+        holder.binding.rvChildItems.adapter = SubCategoryAdapter(category?.sub_categories, onProductClick)
 
     }
 

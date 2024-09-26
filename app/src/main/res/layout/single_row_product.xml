@@ -85,12 +85,12 @@
             android:id="@+id/buttonAddToBag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add to Bag"
-            android:layout_marginTop="12dp"
             android:layout_gravity="center"
-            android:textColor="@android:color/white"
+            android:layout_marginTop="12dp"
             android:backgroundTint="@android:color/holo_purple"
             android:drawableLeft="@drawable/ic_cart"
-            android:textAllCaps="false" />
+            android:text="Add to Bag"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

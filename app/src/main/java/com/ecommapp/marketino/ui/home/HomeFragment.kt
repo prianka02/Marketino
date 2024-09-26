@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,15 +17,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ecommapp.marketino.R
 import com.ecommapp.marketino.data.products.Product
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.ecommapp.marketino.databinding.FragmentHomeBinding
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
-    private lateinit var floatingBtn: FloatingActionButton
-    private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ProductAdapter
-    private lateinit var progressBar: ProgressBar
     private lateinit var viewModel: HomeViewModel
+    private lateinit var homeBinding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,18 +35,13 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        homeBinding = FragmentHomeBinding.bind(view)
 
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
 
-
-        floatingBtn = view.findViewById(R.id.floating_btn)
-        recyclerView = view.findViewById(R.id.recyclerView)
-        progressBar = view.findViewById(R.id.progressBar)
-
-//        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        recyclerView.addItemDecoration(ItemSpacingDecoration(horizontal = 2, vertical = 2))
-        recyclerView.setPadding(8, 0, 0, 0)
+        homeBinding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        homeBinding.recyclerView.addItemDecoration(ItemSpacingDecoration(horizontal = 2, vertical = 2))
+        homeBinding.recyclerView.setPadding(8, 0, 0, 0)
 
 //        Handle the Loading
         handleLoading()
@@ -61,17 +55,12 @@ class HomeFragment : Fragment() {
                     adapter = ProductAdapter(productList) { item ->
                         navigateToDetails(item)
                     }
-                    recyclerView.adapter = adapter
+                    homeBinding.recyclerView.adapter = adapter
                 }
             }
         }
-
-        floatingBtn.setOnClickListener {
-            val intent = Intent(requireContext(), EditProductList::class.java)
-            startActivity(intent)
-        }
-
     }
+
     private fun navigateToDetails(item: Product) {
         val intent = Intent(requireContext(), DetailsActivity::class.java).apply {
             putExtra("PRODUCT", item)
@@ -83,12 +72,11 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.isLoading.collect { isLoading ->
                 if (isLoading) {
-                    progressBar.visibility = View.VISIBLE
+                    homeBinding.progressBar.visibility = View.VISIBLE
                 } else {
-                    progressBar.visibility = View.GONE
+                    homeBinding.progressBar.visibility = View.GONE
                 }
             }
         }
     }
-
 }

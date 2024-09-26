@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="20dp"
+        >
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profile Name"
+            android:padding="10dp"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/logout_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:text="Logout"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
+        android:layout_height="1dp"
+        android:background="#72575656" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Terms &amp; Conditions"
+        android:textSize="15sp"
+        android:padding="5dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Return &amp; Refund Policy"
+        android:textSize="15sp"
+        android:padding="5dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Privacy Policy"
+        android:textSize="15sp"
+        android:padding="5dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shipping &amp; Delivey"
+        android:textSize="15sp"
+        android:padding="5dp"
+        />
+
+</LinearLayout>
