@@ -19,4 +19,7 @@
     <string name="twitter_logo">Twitter logo</string>
     <string name="facebook_logo">Facebook Logo</string>
     <string name="google_logo">Google Logo</string>
+<!--    toggle String for drawer-->
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

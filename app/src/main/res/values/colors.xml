@@ -8,5 +8,6 @@
     <color name="hint_text">#d4dfed</color>
     <color name="error_text">#EB1017</color>
     <color name="top_nav_bar_color">#EB1017</color>
+    <color name="blue_transparent">#0F1CAE</color>
 
 </resources>
